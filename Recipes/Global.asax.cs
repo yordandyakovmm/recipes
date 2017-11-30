@@ -15,7 +15,6 @@ namespace Recipes
         protected void Application_Start()
         {
             FormsAuthentication.Initialize();
-            //AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

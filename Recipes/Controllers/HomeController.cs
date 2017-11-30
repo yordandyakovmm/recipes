@@ -14,7 +14,11 @@ namespace Recipes.Controllers
 
         public ActionResult Index()
         {
+            var contex = new DAL.RecipeDBContext();
+            var count = contex.Forms.Count();
             return View();
+            
+            
         }
 
         
