@@ -193,11 +193,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\Entities\Abstract\EntityBase.cs" />
     <Compile Include="DAL\Entities\Abstract\EntityID.cs" />
+    <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\Entities\Form.cs" />
     <Compile Include="DAL\Entities\Measure.cs" />
     <Compile Include="DAL\Entities\Study.cs" />
     <Compile Include="DAL\Initializers\DbInitializer.cs" />
-    <Compile Include="DAL\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,9 +206,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Recipes.mdf" />
-    <Content Include="App_Data\Recipes_log.ldf">
-      <DependentUpon>Recipes.mdf</DependentUpon>
+    <Content Include="App_Data\ReciepsDB1.mdf" />
+    <Content Include="App_Data\ReciepsDB1_log.ldf">
+      <DependentUpon>ReciepsDB1.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />

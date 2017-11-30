@@ -13,7 +13,7 @@ namespace Recipes.DAL.Migration
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(RecipeDBContext context)

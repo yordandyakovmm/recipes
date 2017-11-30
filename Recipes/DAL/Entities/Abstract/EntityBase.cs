@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Recipes.DAL
 {
-	public abstract class EntityBase:EntityID
+	public abstract class EntityBase
 	{
 		[Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
 		public DateTime CreateDate { get; set; }

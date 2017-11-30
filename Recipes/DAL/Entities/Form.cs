@@ -21,6 +21,7 @@ namespace Recipes.DAL
 		public virtual Measure Measure { get; set; }
         public int? TimeToggle { get; set; }
         public string FormId { get; set; }
+        public string  p { get; set; }
 		
 	}
 }
