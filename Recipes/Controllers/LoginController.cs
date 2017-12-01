@@ -22,11 +22,17 @@ namespace Recipes.Controllers
             {
                 ViewBag.user = (VMUser)Session["user"];
             }
+            else if (User.Identity.IsAuthenticated)
+            {
+                var user = UserHeppler.GetUserById(User.Identity.Name);
+                Session["user"] = user;
+                ViewBag.user = (VMUser)Session["user"];
+            }
+
         }
        
     }
-
-    
+        
     public class LoginController : Controller
     {
         [AllowAnonymous]
@@ -90,6 +96,7 @@ namespace Recipes.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+            Session.Remove("user");
             return Redirect("/");
         }
 

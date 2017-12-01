@@ -14,6 +14,7 @@ namespace Recipes
     {
         protected void Application_Start()
         {
+
             FormsAuthentication.Initialize();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

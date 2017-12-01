@@ -18,7 +18,7 @@ namespace Recipes.DAL.Migration
 
         protected override void Seed(RecipeDBContext context)
         {
-
+            base.Seed(context);
 
         }
     }

@@ -9,6 +9,7 @@ namespace Recipes.DAL
 
         public RecipeDBContext() : base("RecipeConnectionString")
         {
+            Database.SetInitializer<RecipeDBContext>(null);
         }
 
         public DbSet<Users> Users { get; set; }

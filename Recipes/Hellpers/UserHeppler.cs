@@ -9,6 +9,28 @@ namespace Recipes.Hellpers
 {
     public class UserHeppler
     {
+        public static VMUser GetUserById(string userID)
+        {
+            VMUser user = null;
+            using (RecipeDBContext context = new RecipeDBContext())
+            {
+                var userDB = context.Users.Where(u => u.UserId == userID).SingleOrDefault();
+                if (userDB != null)
+                {
+                    user = new VMUser()
+                    {
+                        UserId = userDB.UserId,
+                        FirstName = userDB.FirstName,
+                        LastName = userDB.LastName,
+                        Email = userDB.Email,
+                        PictureUrl = userDB.PictureUrl,
+                        Role = userDB.Role
+                    };
+                }
+            }
+            return user;
+        }
+
         public static VMUser SyncUserToDatabase(VMUser user)
         {
             user.PictureUrl = user.PictureUrl ?? "";
