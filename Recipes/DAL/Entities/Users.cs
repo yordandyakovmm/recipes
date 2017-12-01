@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Recipes.DAL
 {
-	public class User: EntityBase
+	public class Users: EntityBase
 	{
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -24,6 +24,8 @@ namespace Recipes.DAL
         public string PictureUrl { get; set; }
         
         public string Role { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
 	}
 }

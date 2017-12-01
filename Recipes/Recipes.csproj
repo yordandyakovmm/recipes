@@ -193,23 +193,29 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\Entities\Abstract\EntityBase.cs" />
     <Compile Include="DAL\Entities\Abstract\EntityID.cs" />
-    <Compile Include="DAL\Entities\User.cs" />
+    <Compile Include="DAL\Entities\Users.cs" />
     <Compile Include="DAL\Entities\Form.cs" />
     <Compile Include="DAL\Entities\Measure.cs" />
     <Compile Include="DAL\Entities\Study.cs" />
     <Compile Include="DAL\Initializers\DbInitializer.cs" />
+    <Compile Include="Hellpers\UserHeppler.cs" />
+    <Compile Include="Migrations\201711302245583_InitialCreate.cs" />
+    <Compile Include="Migrations\201711302245583_InitialCreate.Designer.cs">
+      <DependentUpon>201711302245583_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711302315470_FixDate.cs" />
+    <Compile Include="Migrations\201711302315470_FixDate.Designer.cs">
+      <DependentUpon>201711302315470_FixDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\VMUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ReciepsDB1.mdf" />
-    <Content Include="App_Data\ReciepsDB1_log.ldf">
-      <DependentUpon>ReciepsDB1.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\grid-layout.css" />
@@ -253,9 +259,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +274,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711302245583_InitialCreate.resx">
+      <DependentUpon>201711302245583_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711302315470_FixDate.resx">
+      <DependentUpon>201711302315470_FixDate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

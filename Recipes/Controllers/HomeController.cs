@@ -8,25 +8,19 @@ using System.Web.Security;
 
 namespace Recipes.Controllers
 {
-    public class HomeController : Controller
+    
+
+    public class HomeController : BaseController
     {
 
-
+        
         public ActionResult Index()
         {
             var contex = new DAL.RecipeDBContext();
-            var count = contex.Forms.Count();
+            var count = contex.Users.Count();
             return View();
-            
-            
+
+
         }
-
-        
-
-
-
-
-
-
     }
 }

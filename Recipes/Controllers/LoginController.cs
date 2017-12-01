@@ -1,18 +1,97 @@
 ﻿using Facebook;
+using Recipes.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Recipes.Hellpers;
 
 namespace Recipes.Controllers
 {
+
+    public class BaseController : Controller
+    {
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            if (Session != null && Session["user"] != null)
+            {
+                ViewBag.user = (VMUser)Session["user"];
+            }
+        }
+       
+    }
+
+    
     public class LoginController : Controller
     {
+        [AllowAnonymous]
+        public ActionResult Facebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["appId"],
+                client_secret = ConfigurationManager.AppSettings["appSecret"],
+                redirect_uri = RediredtUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email"
+            });
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+        
 
+        public ActionResult FacebookCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["appId"],
+                client_secret = ConfigurationManager.AppSettings["appSecret"],
+                redirect_uri = RediredtUri.AbsoluteUri,
+                code = code
+            });
+
+            var accessToken = result.access_token;
+            if (accessToken == null)
+            {
+                return Redirect("/");
+            }
+
+            fb.AccessToken = accessToken;
+            dynamic me = fb.Get("me?fields=link,first_name,currency,last_name,email,gender,locale,timezone,verified,picture,age_range");
+
+            var user = new VMUser
+            {
+                UserId = me.id,
+                FirstName = me.first_name,
+                LastName = me.last_name,
+                Email = me.email,
+                PictureUrl = me.picture.data.url
+            };
+
+            user = UserHeppler.SyncUserToDatabase(user);
+
+            Session["user"] = user;
+                      
+            FormsAuthenticationTicket authTicket = 
+                new FormsAuthenticationTicket(1, user.UserId, DateTime.Now, DateTime.Now.AddMinutes(200), true, user.Role, "/");
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName,
+                                               FormsAuthentication.Encrypt(authTicket));
+            Response.Cookies.Add(cookie);
+            return Redirect("/?54456");
+
+        }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("/");
+        }
 
         private Uri RediredtUri
         {
@@ -27,64 +106,5 @@ namespace Recipes.Controllers
             }
         }
 
-
-        [AllowAnonymous]
-        public ActionResult Facebook()
-        {
-            var fb = new FacebookClient();
-            var loginUrl = fb.GetLoginUrl(new
-            {
-
-                client_id = "146634189431716",
-                client_secret = "98369dbfcfa44e4c733e9924b94eb229",
-                redirect_uri = RediredtUri.AbsoluteUri,
-                response_type = "code",
-                scope = "email"
-            });
-            return Redirect(loginUrl.AbsoluteUri);
-        }
-
-
-
-        public ActionResult FacebookCallback(string code)
-        {
-            var fb = new FacebookClient();
-            dynamic result = fb.Post("oauth/access_token", new
-            {
-                client_id = "146634189431716",
-                client_secret = "98369dbfcfa44e4c733e9924b94eb229",
-                redirect_uri = RediredtUri.AbsoluteUri,
-                code = code
-            });
-
-            var accessToken = result.access_token;
-            Session["AccessToken"] = accessToken;
-            fb.AccessToken = accessToken;
-            dynamic me = fb.Get("me?fields=link,first_name,currency,last_name,email,gender,locale,timezone,verified,picture,age_range");
-            string email = me.email;
-            TempData["email"] = me.email;
-            TempData["first_name"] = me.first_name;
-            TempData["lastname"] = me.last_name;
-            TempData["picture"] = me.picture.data.url;
-
-            //FormsAuthentication.SignOut();
-            //FormsAuthentication.SetAuthCookie(me.id, true);
-
-
-            string roles = "Admin";
-            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-                                                                          1,
-                                                                          me.id,
-                                                                          DateTime.Now,
-                                                                          DateTime.Now.AddMinutes(200),
-                                                                          true,
-                                                                          roles, "/");
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName,
-                                               FormsAuthentication.Encrypt(authTicket));
-            Response.Cookies.Add(cookie);
-
-            return Redirect("/");
-
-        }
     }
 }
