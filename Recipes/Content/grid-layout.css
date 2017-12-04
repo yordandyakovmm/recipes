@@ -7,29 +7,50 @@
     display: grid;
     grid-template-columns: 200px auto 300px;
     grid-template-rows: 200px auto;
-    
+    grid-template-areas: "login logo advert" 
+                         ". content advert";
     grid-gap: 10px;
     background-color: #fff;
     color: #444;
 }
 
 .box{
-    background-color: #444;
+    background-color: #eee;
     color: #fff;
     border-radius: 5px;
     padding: 20px;
     font-size: 150%;
 }
 
+
+.login {
+    grid-area: login;
+}
 .logo {
-    grid-column: 2;
-    grid-row: 1;
+    grid-area: logo;
 }
 .content {
-    grid-column: 2;
-    grid-row: 2;
+    grid-area: content;
 }
 .advert {
-    grid-column: 3;
-    grid-row:  1 / 3;
+    grid-area: advert;
+}
+
+.container-vertical {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+    grid-template-areas: "top" 
+                         "bottom";
+    grid-gap: 5px;
+}
+
+.container-top {
+    grid-area: top;
+    
+}
+
+.container-top {
+    grid-area: bottom;
+    
 }

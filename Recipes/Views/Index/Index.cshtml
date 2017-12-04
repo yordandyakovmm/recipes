@@ -1,20 +1,4 @@
 ﻿<div>
 
-    @Html.ActionLink("Login with facebook", "Facebook", "Login")
-
-    <table>
-
-        @if ( ViewBag.user != null)
-        {
-
-            <tr><td>First Name:</td><td><b(VMUser)>@ViewBag.user.FirstName</b(VMUser)></td></tr>
-
-            <tr><td>Last Name:</td><td><b>@ViewBag.user.LastName</b></td></tr>
-
-            <tr><td>Picture:</td><td><b><img src="@ViewBag.user.PictureUrl" /></b></td></tr>
-
-        }
-
-    </table>
 
 </div>

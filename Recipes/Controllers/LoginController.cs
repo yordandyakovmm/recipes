@@ -89,7 +89,7 @@ namespace Recipes.Controllers
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName,
                                                FormsAuthentication.Encrypt(authTicket));
             Response.Cookies.Add(cookie);
-            return Redirect("/?54456");
+            return Redirect("/");
 
         }
 

@@ -16,8 +16,8 @@ namespace Recipes.Controllers
         
         public ActionResult Index(string studentId, string seond)
         {
-            var contex = new DAL.RecipeDBContext();
-            var count = contex.Users.Count();
+            //var contex = new DAL.RecipeDBContext();
+            //var count = contex.Users.Count();
             return View();
 
 
