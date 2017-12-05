@@ -16,12 +16,14 @@ namespace Recipes.Controllers
         
         public ActionResult Index(string studentId, string seond)
         {
-            //var contex = new DAL.RecipeDBContext();
-            //var count = contex.Users.Count();
             return View();
-
-
         }
+
+        public ActionResult Edit(string studentId, string seond)
+        {
+            return View();
+        }
+
 
         [Route("{category}/{item}")]
         [Route("recipes/{category}/{item}")]

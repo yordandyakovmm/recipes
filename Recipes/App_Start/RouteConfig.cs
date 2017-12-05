@@ -19,6 +19,11 @@ namespace Recipes
                defaults: new { controller = "login", action = "Index", id = UrlParameter.Optional }
            );
 
+            routes.MapRoute(
+              name: "Edit",
+              url: "login/edit",
+              defaults: new { controller = "login", action = "Edit", id = UrlParameter.Optional }
+          );
 
             routes.MapMvcAttributeRoutes();
 
